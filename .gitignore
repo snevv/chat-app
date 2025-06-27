@@ -1,0 +1,23 @@
+# Node modules
+client/node_modules/
+
+# Build output
+client/build/
+
+# Go binaries
+server/*.exe
+server/*.out
+server/*.test
+
+# Go cache and build
+**/*.log
+*.tmp
+*.swp
+
+# IDE/editor settings
+.vscode/
+.idea/
+.DS_Store
+
+# Environment variables
+.env
