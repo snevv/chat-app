@@ -12,6 +12,7 @@ func main() {
 
 	handler := ws.NewHandler(hub)
 
+	http.Handle("/", http.FileServer(http.Dir("./static")))
 	http.HandleFunc("/ws", handler.ServeWS)
 
 	log.Println("Server running at :8080")

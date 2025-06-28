@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+    <head>
+        <title>Chat Test</title>
+        <style>
+            body { font-family: sans-serif; }
+            #chat { border: 1px solid #ccc; height: 300px; overflow-y: scroll; padding: 10px; margin-bottom: 10px; }
+            #msg { width: 80%; }
+        </style>
+    </head>
+    <body>
+        <div id="chat"></div>
+        <input id="msg" type="text" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+
+        <script>
+            const username = prompt("Enter your username") || "Anonymous";
+            const chat = document.getElementById("chat");
+            const msgInput = document.getElementById("msg");
+
+            const socket = new WebSocket("ws://localhost:8080/ws?username=" + encodeURIComponent(username))
+
+            socket.onopen = () => {
+                appendMessage("Connected as " + username);
+                };
+
+            socket.onmessage = (event) =>  {
+                const msg = JSON.parse(event.data);
+                console.log(msg)
+                appendMessage(`[${msg.username}] ${msg.content}`)
+            }
+
+            socket.onclose = () => {
+                appendMessage("Disconnected from server");
+            };
+
+            function sendMessage() {
+                const content = msgInput.value;
+                if (content.trim() === "") return;
+                socket.send(content);
+                msgInput.value = "";
+            }
+
+            function appendMessage(text) {
+                const p = document.createElement("p");
+                p.textContent = text;
+                chat.appendChild(p);
+                chat.scrollTop = chat.scrollHeight;
+            }
+        </script>
+    </body>
+</html>
