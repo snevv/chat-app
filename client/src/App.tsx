@@ -1,6 +1,6 @@
-import TextFielda from "./components/TextFielda.tsx";
+import ChatField from "./components/ChatField.tsx";
 function App() {
-  return <TextFielda />;
+  return <ChatField />;
 }
 
 export default App;
