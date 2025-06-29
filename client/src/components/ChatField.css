@@ -10,12 +10,15 @@
     border: 2px solid #ccc;
 }
 
+/* make the color transparent eventually */
 .chat-message {
     margin-bottom: 10px;
     padding: 10px;
     background-color: #e0e0e0;
     border-radius: 10px;
+    overflow-y: auto;
     max-width: 70%;
+    word-wrap: break-word;
 }
 
 .text-wrapper {
@@ -34,5 +37,6 @@
     height: 40px; 
     border-radius: 15px;
     border: 2px solid #ccc;
+    word-wrap: break-word;
 }
 
